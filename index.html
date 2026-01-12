@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Kyiv Chicken Recipe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        @font-face {
+            font-family: "Cotta";
+            src: url("./cotta/Cotta\ Free.otf");
+        }
+        /* ---------- SMOOTH SCROLL ---------- */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ---------- RESET ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Verdana, sans-serif;
+            line-height: 1.7;
+            color: #222;
+        }
+
+        /* ---------- HEADER ---------- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #111;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            z-index: 1000;
+            font-family: Verdana, sans-serif;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* ---------- UNIT TOGGLE ---------- */
+        .unit-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .toggle-label {
+            width: 46px;
+            height: 22px;
+            background: #2e8b57;
+            border-radius: 20px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .toggle-label::after {
+            content: "";
+            width: 18px;
+            height: 18px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: 0.3s;
+        }
+
+        #units:checked~header .toggle-label::after {
+            left: 26px;
+        }
+
+        /* ---------- UNIT VISIBILITY ---------- */
+        .imperial {
+            display: none;
+        }
+
+        #units:checked~main .metric {
+            display: none;
+        }
+
+        #units:checked~main .imperial {
+            display: inline;
+        }
+
+        /* ---------- SECTIONS ---------- */
+        section {
+            padding: 100px 10%;
+        }
+
+        /* ---------- HERO ---------- */
+        #hero {
+            height: 100vh;
+            background: url(./images/kyiv-landscape.jpg) center/cover no-repeat;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        #hero h1 {
+            font-family: "Cotta", serif;
+            font-size: 4rem;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px 40px;
+            border-radius: 10px;
+        }
+
+        /* ---------- SECTIONS 2–5 STYLE ---------- */
+        #about,
+        #ingredients,
+        #process,
+        #sides {
+            background: #fff9d6;
+            font-family: Verdana, sans-serif;
+        }
+
+        #about h2,
+        #ingredients h2,
+        #process h2,
+        #sides h2 {
+            color: #2e8b57;
+        }
+        #ingredients {
+    padding-top: 60px;
+        }
+        h2 {
+             font-size: 2.5rem; /* или 40px, или 2em */
+             margin-bottom: 20px;
+        }
+        /* ---------- TEXT SIZE ---------- */
+        p {
+            font-size: 20px;
+        }
+
+        li {
+            font-size: 19px;
+            margin-bottom: 10px;
+        }
+
+        ul,
+        ol {
+            max-width: 600px;
+            margin-top: 20px;
+            margin-top: 20px;
+        }
+
+        /* ---------- DESCRIPTION ---------- */
+        #about {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        #about img {
+            max-width: 400px;
+            border-radius: 10px;
+        }
+
+        #about p {
+            max-width: 500px;
+        }
+
+        /* ---------- FOOTER SPACING ---------- */
+        #sides {
+            padding-bottom: 100px;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 768px) {
+            #hero h1 {
+                font-size: 2.5rem;
+            }
+
+            #about {
+                flex-direction: column;
+            }
+        }
+    /* ---------- FLIP CARDS ---------- */
+.card-row {
+    display: flex;
+    gap: 25px;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.flip-card {
+    flex: 1;
+    max-width: 23%;
+    aspect-ratio: 3 / 4; /* SAME WIDTH & HEIGHT FOR ALL */
+    perspective: 1000px;
+}
+
+.flip-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-front,
+.flip-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Image fills card perfectly */
+.flip-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Back side */
+.flip-back {
+    background: #2e8b57;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotateY(180deg);
+}
+
+.flip-back p {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .card-row {
+        flex-wrap: wrap;
+    }
+
+    .flip-card {
+        max-width: 48%;
+    }
+}
+
+@media (max-width: 500px) {
+    .flip-card {
+        max-width: 100%;
+    }
+}
+
+    </style>
+</head>
+
+<body>
+    <input type="checkbox" id="units" hidden>
+
+    <header>
+        <nav>
+            <a href="#ingredients">Ingredients</a>
+            <a href="#process">Process</a>
+            <a href="#sides">Side dishes</a>
+        </nav>
+
+        <div class="unit-toggle">
+            <span>Metric</span>
+            <label for="units" class="toggle-label"></label>
+            <span>Imperial</span>
+        </div>
+    </header>
+
+    <main>
+
+        <section id="hero">
+            <h1>Kyiv Chicken</h1>
+        </section>
+
+        <section id="about">
+            <img src="./images/kyiv-chicken.webp" alt="Kyiv Chicken">
+            <div> 
+                <h2>About the Dish</h2>
+                <p> Kyiv chicken is a classic Ukrainian dish consisting of tender chicken breast filled with garlic butter, breaded and fried until golden. It is crispy on the outside and juicy on the inside.</p>
+            </div>
+           
+        </section>
+
+        <section id="ingredients">
+            <h2>Ingredients</h2>
+            <ul>
+                <li>Chicken breasts –
+                    <span class="metric">500 g</span>
+                    <span class="imperial">18 oz</span>
+                </li>
+                <li>Butter –
+                    <span class="metric">120 g</span>
+                    <span class="imperial">4.2 oz</span>
+                </li>
+                <li>2 eggs</li>
+                <li>Flour –
+                    <span class="metric">60 g</span>
+                    <span class="imperial">2.1 oz</span>
+                </li>
+                <li>Cooking oil – for frying</li>
+                <li>Breadcrumbs</li>
+                <li>2 cloves garlic (minced)</li>
+                <li>Salt and pepper</li>
+                <li>Fresh parsley</li>
+            </ul>
+        </section>
+
+        <section id="process">
+            <h2>Cooking Process</h2>
+            <ol>
+                <li>Mix butter, garlic, and parsley. Shape into a log and freeze.</li>
+                <li>Pound chicken breasts flat and season with salt and pepper.</li>
+                <li>Place butter in the center and tightly roll the chicken.</li>
+                <li>Chill for 30 minutes.</li>
+                <li>Coat in flour, eggs, and breadcrumbs.</li>
+                <li>Fry at
+                    <span class="metric">180°C</span>
+                    <span class="imperial">356°F</span>
+                until golden. </li>
+                <li>Bake for 10 minutes to finish cooking.</li>
+            </ol>
+        </section>
+
+        <section id="sides">
+            <h2>Side Dishes</h2>
+        
+            <div class="card-row">
+                <div class="flip-card">
+                    <div class="flip-inner">
+                        <div class="flip-front">
+                            <img src="./images/mashed-potatoes.jpg" alt="Mashed potatoes">
+                        </div>
+                        <div class="flip-back">
+                            <p>Mashed potatoes</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="flip-card">
+                    <div class="flip-inner">
+                        <div class="flip-front">
+                            <img src="./images/steamed-vegetables.jpg" alt="Steamed vegetables">
+                        </div>
+                        <div class="flip-back">
+                            <p>Steamed vegetables</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="flip-card">
+                    <div class="flip-inner">
+                        <div class="flip-front">
+                            <img src="./images/rice-pilaf.jpg" alt="Rice pilaf">
+                        </div>
+                        <div class="flip-back">
+                            <p>Rice pilaf</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="flip-card">
+                    <div class="flip-inner">
+                        <div class="flip-front">
+                            <img src="./images/green-salad.jpg" alt="Fresh green salad">
+                        </div>
+                        <div class="flip-back">
+                            <p>Fresh green salad</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> 
+    </main>
+</body>
+
+</html>
